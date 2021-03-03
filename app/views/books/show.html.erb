@@ -28,7 +28,7 @@
                             <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "Are you sure?", class: 'btn btn-sm btn-danger' %>
                             </td>
                         <% end %>
-                        
+
                         <% if @book.favorited_by?(current_user) %>
                             <td>
                                 <%= link_to book_favorites_path(@book), method: :delete do %>
@@ -49,13 +49,13 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <table>
             <% @book.book_comments.each do |book_comment| %>
             <tr>
                 <div class="comments">
-                    
-                    <td><%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+
+                    <td><%= attachment_image_tag book_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
                         <p><%= book_comment.user.name %></p>
                     </td>
                     <td><%= book_comment.created_at.strftime('%Y/%m/%d') %></td>
@@ -75,7 +75,7 @@
                 <%= f.submit "送信する" %>
             <% end %>
         </div>
-        
+
     </div>
 </div>
 
