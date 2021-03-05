@@ -56,6 +56,13 @@
         </div>
       </nav>
     </header>
+    
+    <p>検索</p>
+    <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit :search %>
+    <% end %>
+    
     <p class="notice"><%= notice %></p>
     
     <main class="mb-auto">
