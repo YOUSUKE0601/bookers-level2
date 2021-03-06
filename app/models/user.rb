@@ -13,17 +13,29 @@ class User < ApplicationRecord
 
   has_many :followers, through: :followed, source: :follower
   has_many :followings, through: :follower, source: :followed
-  
+
   def follow(user_id)
     follower.create(followed_id: user_id)
   end
-  
+
   def unfollow(user_id)
     follower.find_by(followed_id: user_id).destroy
   end
-  
+
   def following?(user)
     followings.include?(user)
+  end
+
+  def self.looks(searches, words)
+    if searches == "perfect_match"
+      @user = User.where("name LIKE ?", "#{words}")
+    elsif searches == "partial_match"
+      @user = User.where("name LIKE ?", "%#{words}%")
+    elsif searches == "forward_match"
+      @user = User.where("name LIKE ?", "#{words}%")
+    elsif searches == "backward_match"
+      @user = User.where("name LIKE ?", "%#{words}")
+    end
   end
 
   attachment :profile_image

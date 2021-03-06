@@ -11,16 +11,14 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
 
-
-
-
   resources :users, only: [:show, :edit, :update, :index] do
     post 'follow' => 'relationships#follow', as: "follow"
     post 'unfollow' => 'relationships#unfollow', as: "unfollow"
     get 'followings' => 'relationships#followings', as: "followings"
     get 'followers' => 'relationships#followers', as: "followers"
-    get :search, on: :collection
   end
+  
+  get 'search' => "searches#search"
 
 
 
